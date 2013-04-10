@@ -2,9 +2,9 @@ import os
 import httplib
 
 class Connection(httplib.HTTPConnection):
-	api_url = "bomberman-prod.herokuapp.com"
-	api_key = os.environ['BOMBERMAN_API_KEY']
-	headers = {"Authorization": "Token token=" + api_key, "Content-Type": "application/json; charset=utf-8"}
-	
-	def __init__(self):
-		httplib.HTTPConnection.__init__(self, self.api_url)
+  api_url = "bomberman-prod.herokuapp.com"
+  api_key = os.environ['BOMBERMAN_API_KEY']
+  headers = {"Authorization": "Token token=" + api_key, "Content-Type": "application/json; charset=utf-8"}
+  
+  def __init__(self):
+    httplib.HTTPConnection.__init__(self, self.api_url)

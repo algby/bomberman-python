@@ -27,7 +27,7 @@ class TestBomberman(unittest.TestCase):
     corpi = [["The quick brown fox jumped out of hell over the lazy dog.", "The quick brown fox jumped out of <blink>hell</blink> over the lazy dog."]]
     for corpus in corpi:
         self.assertEquals(self.bomberman.highlight(corpus[0], "<blink>", "</blink>"), corpus[1])
-					
+          
 def main():
     unittest.main()
 
