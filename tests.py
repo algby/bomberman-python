@@ -1,3 +1,4 @@
+# coding=utf-8
 import unittest
 from bomberman.client import Client
 
@@ -28,6 +29,21 @@ class TestBomberman(unittest.TestCase):
     for corpus in corpi:
         self.assertEquals(self.bomberman.highlight(corpus[0], "<blink>", "</blink>"), corpus[1])
           
+  def test_japanese_profane(self):
+    corpi = [["黒人", True], ["聖パトリックの日", False], ["つくえ", False]]
+    for corpus in corpi:
+      self.assertEquals(self.bomberman.is_profane(corpus[0], "ja"), corpus[1])
+        
+  def test_japanese_censor(self):
+    corpi = [["くんに紫色のペンギン", unicode("***紫色のペンギン", "utf-8")]]
+    for corpus in corpi:
+      self.assertEquals(self.bomberman.censor(corpus[0], "***", "ja"), corpus[1])
+
+  def test_japanese_highlight(self):
+    corpi = [["くんに紫色のペンギン", unicode("<blink>くんに</blink>紫色のペンギン", "utf-8")]]
+    for corpus in corpi:
+      self.assertEquals(self.bomberman.highlight(corpus[0], "<blink>", "</blink>", "ja"), corpus[1])
+
 def main():
     unittest.main()
 
