@@ -18,10 +18,10 @@ Install the Python client using pip.
 $ pip install bomberman-python
 ```
 
-Before making client requests, make sure your environment contains your API key. If you're using Heroku and Foreman locally, this should already be set for you.
+Before making client requests, make sure your environment contains your API key. If you're using Heroku or Foreman, this should already be set for you.
 
 ```term
-$ export BOMBERMAN_API_KEY=&lt;your api key&gt;
+$ export BOMBERMAN_API_KEY=<your api key>
 ```
 
 Once that is done, create the client in your Python code.
