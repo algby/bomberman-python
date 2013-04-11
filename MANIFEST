@@ -1,0 +1,6 @@
+README.md
+setup.py
+bomberman/__init__.py
+bomberman/client.py
+bomberman/connection.py
+bomberman/error.py
