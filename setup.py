@@ -6,7 +6,7 @@ long_description = open(readme).read()
 
 setup(
     name='bomberman-python',
-    version='0.5.0',
+    version='1.0.2',
     summary='Python client for interacting with Bomberman profanity filtering HTTP API.',
     home_page='http://bomberman.ikayzo.com',
     author='Ikayzo',

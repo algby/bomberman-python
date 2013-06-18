@@ -3,6 +3,7 @@ import json
 import httplib, urllib
 from bomberman.error import BadRequest
 from bomberman.error import Unauthorized
+from bomberman.error import RateLimitExceeded
 from bomberman.error import InternalServerError
 from bomberman.error import LanguageNotSupported
 from bomberman.connection import Connection
@@ -49,9 +50,9 @@ class Client(object):
 
   def __lang_version(self, language="en"):
     if language == "en":
-      return "/v" + self.conn.api_version
+      return "/api/v" + self.conn.api_version
     elif language == "ja":
-      return "/ja/v" + self.conn.api_version
+      return "/api/ja/v" + self.conn.api_version
     else:
       raise LanguageNotSupported
     
@@ -60,6 +61,8 @@ class Client(object):
       raise BadRequest
     elif code == 401:
       raise Unauthorized
+    elif code == 403:
+      raise RateLimitExceeded
     elif code == 500:
       raise InternalServerError
     else:
