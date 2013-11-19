@@ -13,6 +13,7 @@ class Client(object):
     self.conn = Connection()
 
   def is_profane(self, corpus, language="en"):
+    if corpus is not None: corpus = corpus.encode('utf8')
     params = urllib.urlencode({'corpus': corpus})
     self.conn.request("GET", "%s/profanity/check?%s" % (self.__lang_version(language), params), headers=self.conn.headers)
     resp = self.conn.getresponse()
@@ -25,6 +26,8 @@ class Client(object):
       self.__raise_exception(resp.status)
 
   def censor(self, corpus, replacement_text="***", language="en"):
+    if corpus is not None: corpus = corpus.encode('utf8')
+    if replacement_text is not None: replacement_text = replacement_text.encode('utf8')
     params = urllib.urlencode({'corpus': corpus, 'replacement_text': replacement_text})
     self.conn.request("GET", "%s/profanity/censor?%s" % (self.__lang_version(language), params), headers=self.conn.headers)
     resp = self.conn.getresponse()
@@ -37,6 +40,9 @@ class Client(object):
       self.__raise_exception(resp.status)
 
   def highlight(self, corpus, start_tag="<strong>", end_tag="</strong>", language="en"):
+    if corpus is not None: corpus = corpus.encode('utf8')
+    if start_tag is not None: start_tag = start_tag.encode('utf8')
+    if end_tag is not None: end_tag = end_tag.encode('utf8')
     params = urllib.urlencode({'corpus': corpus, 'start_tag': start_tag, 'end_tag': end_tag})
     self.conn.request("GET", "%s/profanity/highlight?%s" % (self.__lang_version(language), params), headers=self.conn.headers)
     resp = self.conn.getresponse()
