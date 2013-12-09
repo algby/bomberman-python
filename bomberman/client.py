@@ -16,7 +16,7 @@ class Client(object):
   def ensure_encoded(text):
       try:
         text.decode('utf8')
-      except UnicodeEncodeError, UnicodeDecodeError:
+      except UnicodeError:
         return text.encode('utf8')
       except AttributeError:
         pass
