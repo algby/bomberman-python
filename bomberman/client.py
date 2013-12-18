@@ -12,8 +12,19 @@ class Client(object):
   def __init__(self):
     self.conn = Connection()
 
+  @staticmethod
+  def ensure_encoded(text):
+      try:
+        text.decode('utf8')
+      except UnicodeError:
+        return text.encode('utf8')
+      except AttributeError:
+        pass
+      return text
+
+
   def is_profane(self, corpus, language="en"):
-    if corpus is not None: corpus = corpus.encode('utf8')
+    corpus = self.ensure_encoded(corpus)
     params = urllib.urlencode({'corpus': corpus})
     self.conn.request("GET", "%s/profanity/check?%s" % (self.__lang_version(language), params), headers=self.conn.headers)
     resp = self.conn.getresponse()
@@ -26,8 +37,8 @@ class Client(object):
       self.__raise_exception(resp.status)
 
   def censor(self, corpus, replacement_text="***", language="en"):
-    if corpus is not None: corpus = corpus.encode('utf8')
-    if replacement_text is not None: replacement_text = replacement_text.encode('utf8')
+    corpus = self.ensure_encoded(corpus)
+    replacement_text = self.ensure_encoded(replacement_text)
     params = urllib.urlencode({'corpus': corpus, 'replacement_text': replacement_text})
     self.conn.request("GET", "%s/profanity/censor?%s" % (self.__lang_version(language), params), headers=self.conn.headers)
     resp = self.conn.getresponse()
@@ -40,9 +51,9 @@ class Client(object):
       self.__raise_exception(resp.status)
 
   def highlight(self, corpus, start_tag="<strong>", end_tag="</strong>", language="en"):
-    if corpus is not None: corpus = corpus.encode('utf8')
-    if start_tag is not None: start_tag = start_tag.encode('utf8')
-    if end_tag is not None: end_tag = end_tag.encode('utf8')
+    corpus = self.ensure_encoded(corpus)
+    start_tag = self.ensure_encoded(start_tag)
+    end_tag = self.ensure_encoded(end_tag)
     params = urllib.urlencode({'corpus': corpus, 'start_tag': start_tag, 'end_tag': end_tag})
     self.conn.request("GET", "%s/profanity/highlight?%s" % (self.__lang_version(language), params), headers=self.conn.headers)
     resp = self.conn.getresponse()
