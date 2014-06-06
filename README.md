@@ -24,7 +24,7 @@ Before making client requests, make sure your environment contains your API key.
 $ export BOMBERMAN_API_KEY=<your api key>
 ```
 
-For users of the Bomberman Heroku addon, please, uncomment line 8 of the connection.py file.
+For users of the Bomberman Heroku addon, please uncomment line 8 of the connection.py file.
 
 Once that is done, create the client in your Python code.
 ```python
