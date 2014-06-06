@@ -2,7 +2,11 @@ import os
 import httplib
 
 class Connection(httplib.HTTPSConnection):
-  api_url = "bomberman-prod.herokuapp.com"
+  api_url = "bomberman.ikayzo.com"
+  
+  # Uncomment the line below if you are using the Bomberman Heroku addon
+  # api_url = "bomberman-prod.herokuapp.com"
+  
   api_key = os.environ['BOMBERMAN_API_KEY']
   api_version = "1"
   headers = {"Authorization": "Token token=" + api_key, "Content-Type": "application/json; charset=utf-8"}
